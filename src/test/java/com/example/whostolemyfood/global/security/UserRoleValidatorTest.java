@@ -76,13 +76,13 @@ class UserRoleValidatorTest {
     }
 
     @Test
-    @DisplayName("[실패] 토큰 권한과 DB 권한이 다르면 ACCESS_DENIED")
+    @DisplayName("[실패] 토큰 권한과 DB 권한이 다르면 USER_ACCESS_DENIED(403)")
     void validate_fail_whenRoleMismatch() {
         ReflectionTestUtils.setField(mockUser, "userRole", UserRole.MASTER);
         given(userRepository.findById(userId)).willReturn(Optional.of(mockUser));
 
         CustomException ex = assertThrows(CustomException.class,
                 () -> userRoleValidator.validate(userId, UserRole.CUSTOMER));
-        assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.ACCESS_DENIED);
+        assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.USER_ACCESS_DENIED);
     }
 }

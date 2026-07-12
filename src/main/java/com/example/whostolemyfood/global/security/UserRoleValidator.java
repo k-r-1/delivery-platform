@@ -35,7 +35,7 @@ public class UserRoleValidator {
         if (user.getUserRole() != tokenRole) {
             log.warn("[Security] Role mismatch detected. userId={}, tokenRole={}, dbRole={}",
                     userId, tokenRole, user.getUserRole());
-            throw new CustomException(ErrorCode.ACCESS_DENIED);
+            throw new CustomException(ErrorCode.USER_ACCESS_DENIED);
         }
     }
 }

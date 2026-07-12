@@ -77,10 +77,10 @@ public class AddressServiceTest {
         mockUserCheck(UserRole.MASTER); // DB 상태 업데이트
 
         // When & Then
-        CustomException ex = assertThrows(CustomException.class, () -> 
+        CustomException ex = assertThrows(CustomException.class, () ->
             addressService.createAddress(ReqCreateAddressDtoV1.builder().build(), userId, tokenRole));
-        
-        assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.ACCESS_DENIED);
+
+        assertThat(ex.getErrorCode()).isEqualTo(ErrorCode.USER_ACCESS_DENIED);
     }
 
     @Test
