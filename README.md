@@ -28,6 +28,8 @@
 | **김영욱** | <a href="https://github.com/kimyounguk1"><img src="https://img.shields.io/badge/GitHub-kimyounguk1-181717?style=flat-square&logo=github&logoColor=white"/></a> | Payment / Infra | 결제 기능 구현, docker-compose 기반 CI/CD 파이프라인 구축 |
 | **박소윤** | <a href="https://github.com/musoyou12"><img src="https://img.shields.io/badge/GitHub-musoyou12-181717?style=flat-square&logo=github&logoColor=white"/></a> | Auth / User | Redis 기반 인증 인가 시스템 구축 및 조회 성능 최적화 |
 
+> 📌 **박주원(k-r-1) 상세 기여 정리** (설계 · 트러블슈팅 · 리팩토링) → [문서 보기](./docs/contributions/박주원-order-address.md)
+
 
 <br>
 

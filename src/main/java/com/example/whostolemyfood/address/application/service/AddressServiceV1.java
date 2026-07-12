@@ -8,9 +8,8 @@ import com.example.whostolemyfood.address.presentation.dto.response.ResCreateAdd
 import com.example.whostolemyfood.address.presentation.dto.response.ResGetAddressDtoV1;
 import com.example.whostolemyfood.global.exception.CustomException;
 import com.example.whostolemyfood.global.exception.ErrorCode;
-import com.example.whostolemyfood.user.domain.entity.UserEntity;
+import com.example.whostolemyfood.global.security.UserRoleValidator;
 import com.example.whostolemyfood.user.domain.entity.UserRole;
-import com.example.whostolemyfood.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -27,31 +26,14 @@ import java.util.UUID;
 public class AddressServiceV1 {
 
     private final AddressRepository addressRepository;
-    private final UserRepository userRepository; // (1) DB 재검증을 위해 유저 레포지토리 주입
-
-    /**
-     * 매 요청 시 DB 권한 실시간 재검증
-     */
-    private void validateUserRoleFromDB(UUID userId, UserRole tokenRole) {
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
-        if (user.getIsDeleted()) {
-            throw new CustomException(ErrorCode.USER_NOT_FOUND);
-        }
-
-        if (user.getUserRole() != tokenRole) {
-            log.warn("[Security] Role mismatch for User: {}. Token: {}, DB: {}", userId, tokenRole, user.getUserRole());
-            throw new CustomException(ErrorCode.ACCESS_DENIED);
-        }
-    }
+    private final UserRoleValidator userRoleValidator;
 
     /**
      * 배송지 생성
      */
     @Transactional
     public ResCreateAddressDtoV1 createAddress(ReqCreateAddressDtoV1 request, UUID userId, UserRole role) {
-        validateUserRoleFromDB(userId, role); // DB 권한 재검증 실행
+        userRoleValidator.validate(userId, role);
 
         log.info("[Address] Creating new address for User: {}, Alias: {}", userId, request.getAlias());
         
@@ -71,7 +53,7 @@ public class AddressServiceV1 {
      * 본인의 배송지 목록 조회
      */
     public Page<ResGetAddressDtoV1> getMyAddresses(UUID userId, UserRole role, String alias, Pageable pageable) {
-        validateUserRoleFromDB(userId, role); // DB 권한 재검증 실행
+        userRoleValidator.validate(userId, role);
 
         log.info("[Address] Fetching addresses for User: {}, Filter: {}", userId, alias);
         
@@ -90,7 +72,7 @@ public class AddressServiceV1 {
      */
     @Transactional
     public ResGetAddressDtoV1 updateAddress(UUID addressId, ReqUpdateAddressDtoV1 request, UUID userId, UserRole role) {
-        validateUserRoleFromDB(userId, role); // DB 권한 재검증 실행
+        userRoleValidator.validate(userId, role);
 
         AddressEntity address = addressRepository.findByIdAndIsDeletedFalse(addressId)
                 .orElseThrow(() -> new CustomException(ErrorCode.ADDRESS_NOT_FOUND));
@@ -122,7 +104,7 @@ public class AddressServiceV1 {
      */
     @Transactional
     public void deleteAddress(UUID addressId, UUID userId, UserRole role) {
-        validateUserRoleFromDB(userId, role); // DB 권한 재검증 실행
+        userRoleValidator.validate(userId, role);
 
         AddressEntity address = addressRepository.findByIdAndIsDeletedFalse(addressId)
                 .orElseThrow(() -> new CustomException(ErrorCode.ADDRESS_NOT_FOUND));

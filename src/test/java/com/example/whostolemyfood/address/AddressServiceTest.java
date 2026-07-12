@@ -9,6 +9,7 @@ import com.example.whostolemyfood.address.presentation.dto.response.ResCreateAdd
 import com.example.whostolemyfood.address.presentation.dto.response.ResGetAddressDtoV1;
 import com.example.whostolemyfood.global.exception.CustomException;
 import com.example.whostolemyfood.global.exception.ErrorCode;
+import com.example.whostolemyfood.global.security.UserRoleValidator;
 import com.example.whostolemyfood.user.domain.entity.UserEntity;
 import com.example.whostolemyfood.user.domain.entity.UserRole;
 import com.example.whostolemyfood.user.domain.repository.UserRepository;
@@ -16,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
@@ -37,7 +37,6 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 public class AddressServiceTest {
 
-    @InjectMocks
     private AddressServiceV1 addressService;
 
     @Mock
@@ -58,6 +57,8 @@ public class AddressServiceTest {
                 .build();
         ReflectionTestUtils.setField(mockUser, "id", userId);
         ReflectionTestUtils.setField(mockUser, "isDeleted", false);
+
+        addressService = new AddressServiceV1(addressRepository, new UserRoleValidator(userRepository));
     }
 
     private void mockUserCheck(UserRole role) {

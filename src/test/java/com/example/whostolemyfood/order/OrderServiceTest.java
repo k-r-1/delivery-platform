@@ -4,6 +4,7 @@ import com.example.whostolemyfood.address.domain.entity.AddressEntity;
 import com.example.whostolemyfood.address.domain.repository.AddressRepository;
 import com.example.whostolemyfood.global.exception.CustomException;
 import com.example.whostolemyfood.global.exception.ErrorCode;
+import com.example.whostolemyfood.global.security.UserRoleValidator;
 import com.example.whostolemyfood.menu.domain.entity.MenuEntity;
 import com.example.whostolemyfood.menu.domain.repository.MenuRepository;
 import com.example.whostolemyfood.order.application.service.OrderServiceV1;
@@ -24,7 +25,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
@@ -48,7 +48,6 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
 
-    @InjectMocks
     private OrderServiceV1 orderService;
 
     @Mock
@@ -74,6 +73,10 @@ public class OrderServiceTest {
                 .build();
         ReflectionTestUtils.setField(mockUser, "id", userId);
         ReflectionTestUtils.setField(mockUser, "isDeleted", false);
+
+        orderService = new OrderServiceV1(
+                orderRepository, storeRepository, menuRepository, addressRepository,
+                new UserRoleValidator(userRepository));
     }
 
     private void mockUserCheck(UserRole role) {
