@@ -1,5 +1,7 @@
 # 🍗 배달 주문 관리 플랫폼, "*누가 내 음식을 훔쳤어?*"
-> **🗓️ 개발 기간: 2025.04.16 ~ 2025.04.30 (2주)**
+> **🗓️ 개발 기간: 2026.04.16 ~ 2026.04.30 (2주)**
+>
+> **🔗 원본 협업 저장소:** [WhoStoleMyfood/Backend](https://github.com/WhoStoleMyfood/Backend) — 팀 협업 당시의 [Pull Request](https://github.com/WhoStoleMyfood/Backend/pulls) · [Issue](https://github.com/WhoStoleMyfood/Backend/issues) 기록을 확인할 수 있습니다.
 
 - 📌 배달의 민족, 쿠팡이츠와 유사한 배달 주문 관리 플랫폼으로, 음식점의 주문 관리, 결제, 리뷰, 주문 내역 관리 기능을 제공합니다. 또한 가게 운영자의 편의를 위해 선택적으로 AI 기반 메뉴 설명 생성 기능을 제공하여 메뉴 관리의 효율성을 높였습니다.
 
