@@ -1,6 +1,7 @@
 # 🍗 배달 주문 관리 플랫폼, "*누가 내 음식을 훔쳤어?*"
-> **🗓️ 개발 기간: 2026.04.16 ~ 2026.04.30 (2주)**
->
+
+**🗓️ 개발 기간: 2026.04.16 ~ 2026.04.30 (2주)**
+
 > **🔗 원본 협업 저장소:** [WhoStoleMyfood/Backend](https://github.com/WhoStoleMyfood/Backend) — 팀 협업 당시의 [Pull Request](https://github.com/WhoStoleMyfood/Backend/pulls) · [Issue](https://github.com/WhoStoleMyfood/Backend/issues) 기록을 확인할 수 있습니다.
 
 - 📌 배달의 민족, 쿠팡이츠와 유사한 배달 주문 관리 플랫폼으로, 음식점의 주문 관리, 결제, 리뷰, 주문 내역 관리 기능을 제공합니다. 또한 가게 운영자의 편의를 위해 선택적으로 AI 기반 메뉴 설명 생성 기능을 제공하여 메뉴 관리의 효율성을 높였습니다.
@@ -17,6 +18,14 @@
 
 <br>
 
+## 👩‍💻 박주원(k-r-1) — 담당 도메인 & 리팩토링
+
+주문·배송지 도메인과 팀 전체 통합 테스트를 담당했습니다. 프로젝트 종료 후에도 코드 품질을 높이기 위해 **권한 검증 중복 로직을 공통 컴포넌트로 추출하는 리팩토링**을 이어갔습니다.
+
+📄 **[설계 · 트러블슈팅 · 리팩토링 상세 문서 →](./docs/contributions/박주원-order-address.md)**
+
+<br>
+
 ## 👥 팀원 역할분담
 
 | **성함** | **GitHub** | **역할 (Domain)** | **주요 업무 및 성과** |
@@ -27,8 +36,6 @@
 | **이승민** | <a href="https://github.com/Cork-7"><img src="https://img.shields.io/badge/GitHub-Cork--7-181717?style=flat-square&logo=github&logoColor=white"/></a> | AI / Store / Menu | AI 연동 가게 및 메뉴 관리 기능 구현, Swagger 및 ERD 작성 |
 | **김영욱** | <a href="https://github.com/kimyounguk1"><img src="https://img.shields.io/badge/GitHub-kimyounguk1-181717?style=flat-square&logo=github&logoColor=white"/></a> | Payment / Infra | 결제 기능 구현, docker-compose 기반 CI/CD 파이프라인 구축 |
 | **박소윤** | <a href="https://github.com/musoyou12"><img src="https://img.shields.io/badge/GitHub-musoyou12-181717?style=flat-square&logo=github&logoColor=white"/></a> | Auth / User | Redis 기반 인증 인가 시스템 구축 및 조회 성능 최적화 |
-
-> 📌 **박주원(k-r-1) 상세 기여 정리** (설계 · 트러블슈팅 · 리팩토링) → [문서 보기](./docs/contributions/박주원-order-address.md)
 
 
 <br>
